@@ -4,8 +4,8 @@
 
 TextInput::TextInput()
 {
-  this->x = 10;
-  this->y = 10;
+  this->x = 0;
+  this->y = 0;
   this->w = 100;
   this->h = 20;
   this->background_color = new short int(3);
@@ -31,6 +31,16 @@ TextInput::TextInput()
   this->cursor_position = 0;
 }
 
+void TextInput::set_position(int x, int y){
+  this->x=x;
+  this->y=y;
+}
+
+void TextInput::set_size(int w, int h){
+  this->w=h;
+  this->w=h;
+}
+
 int TextInput::inner_height()
 {
   return this->h + this->padding[1] + this->padding[3] + 2*this->border_width;
@@ -44,12 +54,7 @@ int TextInput::inner_width()
 
 void TextInput::show(){
 
-  
-  //glMatrixMode(GL_PROJECTION);	
-  //glLoadIdentity();				
-
   glColor3ub(this->border_color[0], this->border_color[1], this->border_color[2]);
-  //glColor3f(0,1,1);
   glLineWidth(this->border_width);
   glBegin(GL_LINE_LOOP);
   glVertex2i(this->x, this->y);
@@ -57,17 +62,16 @@ void TextInput::show(){
   glVertex2i(this->x + this->inner_width(), this->y+this->inner_height());
   glVertex2i(this->x, this->y+this->inner_height());
   glEnd();
-  /*
-  glViewport(this->x, this->y, this->x + this->inner_width(), this->y + this->inner_height());
+
+  glViewport(this->x, this->y, this->inner_width(), this->inner_height());
   glMatrixMode (GL_MODELVIEW);
   glLoadIdentity();
-  gluOrtho2D(this->x, this->x + this->inner_width(), this->y, this->y + this->inner_height());
+  gluOrtho2D(0, this->inner_width(), 0, this->inner_height());
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity();
-  */
+
   glColor3ub(this->color[0], this->color[1], this->color[2]);
-  //glRasterPos2f(this->x + this->padding[0], this->y + this->padding[3]);
-  glRasterPos2f(this->x + this->padding[0] + this->border_width, this->y + this->padding[3] + this->border_width);
+  glRasterPos2f(this->padding[0] + this->border_width,this->padding[3] + this->border_width);
   short int dx=0;
   for (int i=0; i <= this->value.size(); i++) 
     {
@@ -76,8 +80,8 @@ void TextInput::show(){
       if(i+1 == this->cursor_position && this->focus){
 	glColor3ub(this->color[0]/2, this->color[1]/2, this->color[2]/2);
 	glBegin(GL_LINES);
-	glVertex2i(this->x + dx + 1 + this->padding[0] + this->border_width, this->y + this->padding[3] + this->border_width);
-	glVertex2i(this->x + dx + 1 + this->padding[0] + this->border_width, this->y + 18 + this->padding[3] + this->border_width);
+	glVertex2i(dx + 1 + this->padding[0] + this->border_width, this->padding[3] + this->border_width);
+	glVertex2i(dx + 1 + this->padding[0] + this->border_width, 18 + this->padding[3] + this->border_width);
 
 	glEnd();
       }
@@ -86,8 +90,8 @@ void TextInput::show(){
     {
       glColor3ub(this->color[0]/2, this->color[1]/2, this->color[2]/2);
       glBegin(GL_LINES);
-	glVertex2i(this->x + 1 + this->padding[0] + this->border_width, this->y + this->padding[3] + this->border_width);
-	glVertex2i(this->x + 1 + this->padding[0] + this->border_width, this->y + 18 + this->padding[3] + this->border_width);
+	glVertex2i(1 + this->padding[0] + this->border_width, this->padding[3] + this->border_width);
+	glVertex2i(1 + this->padding[0] + this->border_width, 18 + this->padding[3] + this->border_width);
       glEnd();
     }
 }
@@ -138,7 +142,7 @@ void TextInput::keyspecial(int key, int mousePositionX, int mousePositionY){
 	this->cursor_position++;
       }
     }
-  printf("%i %i %i %i\n", key, mousePositionX, mousePositionY, this->focus);
+  //printf("%i %i %i %i\n", key, mousePositionX, mousePositionY, this->focus);
 }
 
 TextInput::~TextInput()

@@ -196,19 +196,19 @@ void GLController::mouse(int button, int state, int x, int y)
 
 void GLController::display()
 {
-    glViewport(0, 0, this->width, this->height);
-    glMatrixMode (GL_MODELVIEW);
-    glLoadIdentity ();
-    gluOrtho2D(0, this->width, 0, this->height);
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		     
   //glLoadIdentity();
   this->observer->set_look_at();
 
-  for (int i = 0; i!=this->graphicsObjects.size(); ++i)
+  for (int i = 0; i!=this->graphicsObjects.size(); i++)
     {
+      glViewport(0, 0, this->width, this->height);
+      glMatrixMode (GL_MODELVIEW);
+      glLoadIdentity ();
+      gluOrtho2D(0, this->width, 0, this->height);
+      glMatrixMode (GL_PROJECTION);
+      glLoadIdentity ();
+ 
       this->graphicsObjects[i]->show();
     }
 

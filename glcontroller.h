@@ -28,10 +28,10 @@ typedef struct {
 class GraphicsObj{
  public:
   //GraphicsObj(){};
-  virtual void keyboard(unsigned char, int, int) {};
-  virtual void keyspecial(int, int, int) {};
-  virtual void mouse(int, int, int, int) {};
-  virtual void show() {};
+  virtual void keyboard(unsigned char, int, int)=0;
+  virtual void keyspecial(int, int, int)=0;
+  virtual void mouse(int, int, int, int)=0;
+  virtual void show()=0;
 
   //~GraphicsObj(){};
 };

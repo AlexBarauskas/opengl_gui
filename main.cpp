@@ -20,8 +20,14 @@ int main(int argc, char* argv[])
   glutInit( &argc, argv );
   glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH );
   controller = new GLController(400, 400, 2);
-  controller->add_obj(new TextInput());
-  
+
+  TextInput * ti1, * ti2;
+  ti1 = new TextInput();
+  ti2 = new TextInput();
+  ti1->set_position(100,100);
+  ti2->set_position(100,300);
+  controller->add_obj(ti1);
+  controller->add_obj(ti2);  
 
   glutDisplayFunc( display );
   glutKeyboardFunc( keyboard );

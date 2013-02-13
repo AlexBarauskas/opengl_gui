@@ -5,10 +5,10 @@ using std::string;
 class GUIObj : public GraphicsObj
 {
  public:
-  virtual void keyboard(unsigned char, int, int) {};
-  virtual void keyspecial(int, int, int) {};
-  virtual void mouse(int, int, int, int) {};
-  virtual void show() {};
+  virtual void keyboard(unsigned char, int, int)=0;
+  virtual void keyspecial(int, int, int)=0;
+  virtual void mouse(int, int, int, int)=0;
+  virtual void show()=0;
 };
 
 class TextInput : public GraphicsObj
@@ -30,6 +30,9 @@ class TextInput : public GraphicsObj
 
  public:
   TextInput();
+  void set_position(int, int);
+  void set_size(int, int);
+
   void show();
   void keyboard( unsigned char, int, int);
   void mouse(int, int, int, int);
